@@ -33,6 +33,16 @@ class Rover {
                let modeObj = {completed : true};
                obj.results.push(modeObj);
             }
+         }else if(commands[i].commandType === "MOVE"){
+            if(this.mode !== "LOW_POWER"){
+               this.position = commands[i].value;
+               let moveObj = {completed : true}
+               obj.results.push(moveObj);
+            }
+            else{
+               let powerObj = {completed : false};
+               obj.results.push(powerObj);
+            }
          }
       }
       return obj;

@@ -52,8 +52,16 @@ describe("Rover class", function() {
   })
   test("responds with the position for the move command",function(){
     let rover = new Rover(98765);
-    let commands = new Command("MOVE");
+    let commands = [new Command("MOVE",56789)];
     let message = new Message("Testing with MOVE command",commands);
-    expect(rover.receiveMessage(message).position).toEqual(56789);
+    expect(rover.receiveMessage(message).results[0].completed).toEqual(true);
+    expect(rover.position).toEqual(56789);
   })
 });
+// let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
+// let message = new Message('Test message with two commands', commands);
+//  let rover = new Rover(98382); 
+// let response = rover.receiveMessage(message);
+
+// console.log(response);
+
