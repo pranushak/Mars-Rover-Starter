@@ -24,24 +24,22 @@ class Rover {
             position : this.position
            }
            obj.results.push(commandObj);
-         }else if(commands[i].commandType === "MODE_CHANGE"){
-            if(this.mode === "LOW_POWER"){
-               let lowObj = {completed : false};
-               obj.results.push(lowObj);
-            }else {
+         } else if(commands[i].commandType === "MODE_CHANGE") {
+            if(this.mode === "LOW_POWER") {
+               this.mode = "NORMAL"
+               obj.results.push({completed : true});
+            } else {
                this.mode = "LOW_POWER";
-               let modeObj = {completed : true};
-               obj.results.push(modeObj);
+               obj.results.push({completed : true});
             }
-         }else if(commands[i].commandType === "MOVE"){
-            if(this.mode !== "LOW_POWER"){
+         } else if(commands[i].commandType === "MOVE") {
+            if(this.mode === "LOW_POWER") {
+               obj.results.push({completed : false});
+            } else if(this.mode === "NORMAL") {
                this.position = commands[i].value;
-               let moveObj = {completed : true}
-               obj.results.push(moveObj);
-            }
-            else{
-               let powerObj = {completed : false};
-               obj.results.push(powerObj);
+               obj.results.push({completed : true});
+            } else {
+               obj.results.push({completed : false});
             }
          }
       }
