@@ -25,13 +25,8 @@ class Rover {
            }
            obj.results.push(commandObj);
          } else if(commands[i].commandType === "MODE_CHANGE") {
-            if(this.mode === "LOW_POWER") {
-               this.mode = "NORMAL"
+               this.mode = commands[i].value;
                obj.results.push({completed : true});
-            } else {
-               this.mode = "LOW_POWER";
-               obj.results.push({completed : true});
-            }
          } else if(commands[i].commandType === "MOVE") {
             if(this.mode === "LOW_POWER") {
                obj.results.push({completed : false});

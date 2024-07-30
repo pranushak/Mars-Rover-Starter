@@ -39,7 +39,7 @@ describe("Rover class", function() {
   })
   test("responds correctly to the mode change command",function(){
     let rover = new Rover(98382); 
-    let commands = [new Command("MODE_CHANGE")];
+    let commands = [new Command("MODE_CHANGE","LOW_POWER")];
     let message = new Message("Testing with MODE_CHANGE commands",commands);
     expect(rover.receiveMessage(message).results[0].completed).toEqual(true);
     expect(rover.mode).toBe("LOW_POWER");
